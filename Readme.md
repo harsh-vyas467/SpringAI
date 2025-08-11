@@ -63,3 +63,36 @@ Use this instead of just .getResult().getOutput().getText() if you need rich dat
 Logging the model used is helpful for debugging and analytics
 
 chatResponse.getMetadata().getModel() gives you the model name (e.g., gpt-4-turbo).
+
+------------------
+
+When we use multiple LLM's ,it is important to structure your code so that you can easily switch or configure different providers (like OpenAI, Azure OpenAI, Mistral, etc.). :
+
+public OpenAIController(ChatClient.Builder builder){
+this.chatClient = builder.build();
+
+--------------
+
+It's not llm feature to store data and for that we use advisor📝 Notes on Chat Memory Setup in OpenAIController
+
+
+ChatMemory chatMemory = MessageWindowChatMemory.builder().build();
+Creates a chat memory instance that stores recent conversation messages in a sliding window (a fixed-size context).
+This enables the model to maintain conversational context across multiple calls.
+
+ChatClient.Builder with .defaultAdvisors(...)
+
+The builder is configured with a MessageChatMemoryAdvisor which uses the chatMemory.
+
+Advisors can modify, enhance, or influence chat requests/responses dynamically.
+
+Here, it integrates memory into the chat flow, so each prompt is aware of recent chat history.
+
+In the constructor:
+
+chatClient is built with memory support so the controller handles conversations with state, not just isolated prompts.
+
+
+
+
+
