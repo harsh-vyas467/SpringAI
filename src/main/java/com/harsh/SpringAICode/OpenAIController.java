@@ -1,7 +1,9 @@
 package com.harsh.SpringAICode;
 
 
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,16 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OpenAIController {
 
-    private OpenAiChatModel chatModelel;
+    private ChatClient chatClient;
 
     public OpenAIController(OpenAiChatModel chatModel){
-        this.chatModelel = chatModel;
+        this.chatClient = ChatClient.create(chatModel);
     }
 
-    @GetMapping("/api/{prompt}")
-    public String getAnswer(@PathVariable String prompt){
+    @GetMapping("/api/{message}")
+    public ResponseEntity<String> getAnswer(@PathVariable String message){
 
-        String response = chatModelel.call(prompt);
-        return response;
+        String response = chatClient.prompt(message).call().content();
+        return ResponseEntity.ok(response);
     }
 }

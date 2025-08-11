@@ -35,3 +35,20 @@ You’ll send the user's prompt to the chat model and return the response.
 
 Example request:
 GET http://localhost:8080/api/tell%20me%20a%20tech%20joke
+
+
+----------------
+
+ChatClient Integration
+A ChatClient class has been created to interact with the OpenAI Chat model.
+
+This client is responsible for:
+
+Sending user prompts to the OpenAI API.
+
+Receiving and returning the model's response.
+
+It acts as a middleware between the Spring Boot application and the OpenAI backend.
+
+This approach keeps the codebase modular and makes API communication reusable and easy to manage.
+
