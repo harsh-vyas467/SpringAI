@@ -11,6 +11,7 @@ Navigate to the Billing section and add credits to your account.
 
 3. Generate an API Key
    Go to the API Keys section in your OpenAI dashboard.
+![img.png](img.png)
 
 Click Create new secret key.
 
@@ -52,3 +53,13 @@ It acts as a middleware between the Spring Boot application and the OpenAI backe
 
 This approach keeps the codebase modular and makes API communication reusable and easy to manage.
 
+--------------
+Use chatResponse() when you need more than just text
+
+.chatResponse() gives access to metadata like model name, tokens used, etc.
+
+Use this instead of just .getResult().getOutput().getText() if you need rich data.
+
+Logging the model used is helpful for debugging and analytics
+
+chatResponse.getMetadata().getModel() gives you the model name (e.g., gpt-4-turbo).
