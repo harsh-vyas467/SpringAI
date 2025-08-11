@@ -92,6 +92,19 @@ In the constructor:
 
 chatClient is built with memory support so the controller handles conversations with state, not just isolated prompts.
 
+-------------
+
+💡 Using Ollama as a Local Alternative to OpenAI
+OpenAI API is paid, so we can use Ollama to run models like Mistral locally.
+
+After installing Ollama, start a model with:
+
+ollama run mistral
+No API key is required. Instead, specify the model name in application.properties:
+
+properties
+
+spring.ai.ollama.chat.options.model=deepseek-r1:7b
 
 
 
